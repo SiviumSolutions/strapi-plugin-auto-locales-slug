@@ -1,0 +1,101 @@
+{
+  "name": "strapi-plugin-auto-locales-slug",
+  "version": "0.0.1",
+  "description": "Locales will add auto end of the slug",
+  "keywords": [
+    "strapi",
+    "plugin",
+    "locales",
+    "slug",
+    "auto",
+    "multilingual",
+    "content-management",
+    "CMS",
+    "react",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Alvi H.",
+    "email": "livealvi@gmail.com",
+    "url": "https://github.com/livealvi",
+    "linkedIn": "https://www.linkedin.com/in/alvihasan/"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/livealvi/strapi-plugin-auto-locales-slug.git"
+  },
+  "scripts": {
+    "build": "strapi-plugin build",
+    "prepare": "strapi-plugin build",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link",
+    "verify": "strapi-plugin verify",
+    "test:ts:front": "run -T tsc -p admin/tsconfig.json",
+    "test:ts:back": "run -T tsc -p server/tsconfig.json"
+  },
+  "dependencies": {
+    "@strapi/design-system": "^2.0.0-rc.12",
+    "@strapi/icons": "^2.0.0-rc.12",
+    "react-intl": "^6.8.7"
+  },
+  "devDependencies": {
+    "@strapi/sdk-plugin": "^5.2.7",
+    "@strapi/strapi": "^5.3.0",
+    "@strapi/typescript-utils": "^5.3.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "styled-components": "^6.1.13",
+    "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "@strapi/sdk-plugin": "^5.2.7",
+    "@strapi/strapi": "^5.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "styled-components": "^6.1.13"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=6.0.0",
+    "yarn": ">=1.22.22"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-admin": {
+      "types": "./dist/admin/src/index.d.ts",
+      "source": "./admin/src/index.ts",
+      "import": "./dist/admin/index.mjs",
+      "require": "./dist/admin/index.js",
+      "default": "./dist/admin/index.js"
+    },
+    "./strapi-server": {
+      "types": "./dist/server/src/index.d.ts",
+      "source": "./server/src/index.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "strapi": {
+    "kind": "plugin",
+    "name": "auto-locales-slug",
+    "displayName": "Auto Locales Slug",
+    "description": "Locales will add auto end of the slug"
+  },
+  "issues": {
+    "url": "https://github.com/livealvi/strapi-plugin-auto-locales-slug/issues"
+  },
+  "type": "commonjs"
+}
