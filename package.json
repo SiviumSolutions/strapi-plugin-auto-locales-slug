@@ -1,7 +1,7 @@
 {
   "name": "strapi-plugin-auto-locales-slug",
-  "version": "0.0.1",
-  "description": "Locales will add auto end of the slug",
+  "version": "0.0.2",
+  "description": "Auto locales will add auto end of the slug",
   "keywords": [
     "strapi",
     "plugin",
