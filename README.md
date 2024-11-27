@@ -31,6 +31,10 @@ Using yarn:
 yarn add auto-locales-slug
 ```
 
+## Compatibility
+
+- **Required Strapi Version:** 5.x.x
+
 ## Bug Report
 
 If you encounter any issues or bugs, please report them at our [GitHub Issues page](https://github.com/livealvi/strapi-plugin-auto-locales-slug/issues).
