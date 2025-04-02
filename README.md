@@ -1,12 +1,14 @@
 # Auto Locales Slug Strapi Plugin
 
+![ Auto Locales Slug Strapi Plugin](https://i.ibb.co.com/Z18jqb1F/strapi-plugin-auto-locales-slug.gif)
+
 ## Description
 
 This plugin automatically adds a locale to the end of the slug.
 
 ## How It Works
 
-This plugin operates by appending a locale to the end of a slug. It specifically works with fields named 'title' or 'name'. The plugin retrieves the value from these fields and applies it according to the pattern specified in the plugin's basic settings. You must select either 'title' or 'name' in the pattern option for the plugin to function correctly.
+This plugin checks at the database level whether the slug is available. It operates by appending a locale to the end of a slug. It specifically works with fields named 'title' or 'name'. The plugin retrieves the value from these fields and applies it according to the pattern specified in the plugin's basic settings. You must select either 'title' or 'name' in the pattern option for the plugin to function correctly.
 
 ## Features
 
