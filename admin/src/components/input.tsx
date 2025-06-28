@@ -8,6 +8,7 @@ import { getFetchClient } from "@strapi/strapi/admin";
 import { Field } from "@strapi/design-system";
 import PLUGIN_ID from "../pluginId";
 import slugifyLib from "slugify";
+
 interface Field {
   error?: string | boolean;
   hint?: React.ReactNode;
@@ -17,6 +18,7 @@ interface Field {
   required?: boolean;
   label?: string;
 }
+
 slugifyLib.extend({
   "ї": "yi",
   "й": "i",
@@ -26,9 +28,9 @@ slugifyLib.extend({
 
 const slugify = (str: string, locale: string) =>
   slugifyLib(str, {
-    lower: true,      // усе в нижній регістр
-    strict: true,     // прибрати зайві символи, залишити a-z, 0-9 та «-»
-    locale: locale,     // для російської можна "ru", а можна залишити "uk"
+    lower: true,
+    strict: true,
+    locale: locale,
     trim: true,
   });
 
@@ -43,16 +45,8 @@ const SlugInput = (props: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [reGenerate, setReGenerate] = useState<boolean>(false);
 
-  const ensureLocaleInSlug = (slug: string) => {
-    if (currentLocale && !slug.endsWith(`-${currentLocale}`)) {
-      return `${slug}-${currentLocale}`;
-    }
-    return slug;
-  };
-
   // @ts-ignore
   const uid: string = model;
-  // need field
   const key: string = name;
   // @ts-ignore
   const pattern = contentType?.attributes[key]?.options?.pattern;
@@ -62,9 +56,20 @@ const SlugInput = (props: any) => {
     contentType?.attributes?.hasOwnProperty("title") ||
     // @ts-ignore
     contentType?.attributes?.hasOwnProperty("name");
+  
+  // Перевірка чи включена i18n для цього поля
   const isI18nEnabled: boolean =
     // @ts-ignore
     contentType?.attributes?.[name]?.pluginOptions?.i18n?.localized || false;
+
+  // Модифікована функція для додавання локалі тільки якщо i18n включена
+  const ensureLocaleInSlug = (slug: string) => {
+    // Додаємо локаль тільки якщо i18n включена для цього поля і локаль існує
+    if (isI18nEnabled && currentLocale && !slug.endsWith(`-${currentLocale}`)) {
+      return `${slug}-${currentLocale}`;
+    }
+    return slug;
+  };
 
   useEffect(() => {
     if (!isTitleOrName) {
@@ -82,7 +87,6 @@ const SlugInput = (props: any) => {
     setCurrentLocale(locale || "");
     onChange?.({ target: { name: "setLocale", value: locale } });
   }, [location]);
-  key;
 
   useEffect(() => {
     if (initialValues?.[pattern] !== modifiedData?.[pattern]) {
@@ -110,7 +114,7 @@ const SlugInput = (props: any) => {
       }
       setError(null);
       setIsValid(true);
-      setInputSlug(ensureLocaleInSlug(modifiedData?.[pattern]));
+      setInputSlug(ensureLocaleInSlug(slug));
       setReGenerate(false);
       return true;
     } catch (error) {
@@ -173,20 +177,25 @@ const SlugInput = (props: any) => {
       required={attribute?.required}
       error={error}
       hint={
-        <>
-          Slug will be auto added based on the locale:
-          <span
-            style={{
-              color: "#be5d01",
-              fontWeight: "bold",
-              padding: "0 5px",
-              backgroundColor: "#f4f4f4",
-              marginLeft: "3px",
-            }}
-          >
-            -{currentLocale}
-          </span>
-        </>
+        // Показуємо підказку про локаль тільки якщо i18n включена
+        isI18nEnabled ? (
+          <>
+            Slug will be auto added based on the locale:
+            <span
+              style={{
+                color: "#be5d01",
+                fontWeight: "bold",
+                padding: "0 5px",
+                backgroundColor: "#f4f4f4",
+                marginLeft: "3px",
+              }}
+            >
+              -{currentLocale}
+            </span>
+          </>
+        ) : (
+          "Slug will be generated automatically"
+        )
       }
     >
       <span style={{ display: "flex", alignItems: "center" }}>
@@ -242,9 +251,9 @@ const SlugInput = (props: any) => {
                   >
                     <path
                       fill="#008000"
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12Zm-1.438-11.066L16.158 7.5 18 9.245l-7.438 7.18-4.462-4.1 1.84-1.745 2.622 2.354Z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     ></path>
                   </svg>
                   Available
