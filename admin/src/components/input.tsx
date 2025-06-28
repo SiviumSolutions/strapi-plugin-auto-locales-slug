@@ -7,6 +7,7 @@ import { unstable_useDocumentActions as useDocumentActions } from "@strapi/strap
 import { getFetchClient } from "@strapi/strapi/admin";
 import { Field } from "@strapi/design-system";
 import PLUGIN_ID from "../pluginId";
+import slugifyLib from "slugify";
 interface Field {
   error?: string | boolean;
   hint?: React.ReactNode;
@@ -16,13 +17,20 @@ interface Field {
   required?: boolean;
   label?: string;
 }
+slugifyLib.extend({
+  "ї": "yi",
+  "й": "i",
+  "є": "ie",
+  "ґ": "g",
+});
 
-const slugify = (str: string) =>
-  str
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
+const slugify = (str: string, locale: string) =>
+  slugifyLib(str, {
+    lower: true,      // усе в нижній регістр
+    strict: true,     // прибрати зайві символи, залишити a-z, 0-9 та «-»
+    locale: locale,     // для російської можна "ru", а можна залишити "uk"
+    trim: true,
+  });
 
 const SlugInput = (props: any) => {
   const { name, label, value, attribute, onChange } = props;
@@ -135,7 +143,7 @@ const SlugInput = (props: any) => {
 
   const generateSlug = () => {
     if (modifiedData?.[pattern]) {
-      const newSlug = ensureLocaleInSlug(slugify(modifiedData?.[pattern]));
+      const newSlug = ensureLocaleInSlug(slugify(modifiedData?.[pattern], currentLocale));
       setInputSlug(newSlug);
       onChange?.({ target: { name, value: newSlug } });
       handleInputChange({ target: { value: newSlug } } as any);
@@ -145,7 +153,7 @@ const SlugInput = (props: any) => {
   let counter = 1;
   const handleReGenerate = () => {
     const newSlug = ensureLocaleInSlug(
-      slugify(modifiedData?.[pattern] + `-` + counter),
+      slugify(modifiedData?.[pattern] + `-` + counter, currentLocale),
     );
     counter++;
     setInputSlug(newSlug);
