@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-auto-locales-slug",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Auto locales will add auto end of the slug",
   "keywords": [
     "strapi",
@@ -17,16 +17,16 @@
   "license": "MIT",
   "author": {
     "name": "Alvi H.",
-    "email": "livealvi@gmail.com",
-    "url": "https://github.com/livealvi",
-    "linkedIn": "https://www.linkedin.com/in/alvihasan/"
+    "email": "info@sivium.solutions",
+    "url": "https://github.com/SiviumSolutions",
+    "linkedIn": "https://www.linkedin.com/in/SiviumSolutions/"
   },
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/livealvi/strapi-plugin-auto-locales-slug.git"
+    "url": "https://github.com/SiviumSolutions/strapi-plugin-auto-locales-slug.git"
   },
   "scripts": {
     "build": "strapi-plugin build",
@@ -96,7 +96,7 @@
     "description": "Locales will add auto end of the slug"
   },
   "issues": {
-    "url": "https://github.com/livealvi/strapi-plugin-auto-locales-slug/issues"
+    "url": "https://github.com/SiviumSolutions/strapi-plugin-auto-locales-slug/issues"
   },
   "type": "commonjs"
 }
